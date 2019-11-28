@@ -3,10 +3,8 @@ const router = express.Router()
 const Visitor = require('../models/Visitor')
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth')
 
-// Welcome Page
 router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'))
 
-// Dashboard
 router.get('/dashboard', ensureAuthenticated, async (req, res) => {
   try {
     const visitors = await Visitor.find()
@@ -36,18 +34,70 @@ router.post('/visitors', async (req, res) => {
   }
 })
 
-router.get("/visitor/:id", async (req, res) => {
+router.post("/visitor/:id/checkin", async (req, res) => {
   try {
+    const data = {
+      checkin: Date.now()
+    }
     const visitor = await Visitor.findById(req.params.id)
-    res.render("visitor", {visitor})
+    //if already checked in don't allow to checkin
+    if(visitor.entry && visitor.entry.length > 0)
+    {
+      const lastCheckIn = visitor.entry[visitor.entry.length - 1]
+      const lastCheckInTimestamp = lastCheckIn.checkin.getTime()
+      if (Date.now() > lastCheckInTimestamp + 100)
+      {
+        console.log('already checked in')
+        req.flash('error',`${visitor.name} have checkedin for today already`)
+        res.redirect('/dashboard')
+      }
+    }
+    else
+    {
+      visitor.entry.push(data)
+      await visitor.save()
+      console.log(`${visitor.name} have been checkedin in for today successfully`)
+      req.flash('success', `${visitor.name} have been checkedin in for today successfully`)
+      res.redirect('/dashboard')
+    } 
   }
-  catch ( err )
+  catch (err)
   {
-    console.log( err )
-    req.flash('error', 'cannot find visitor')
-    res.redirect('back')
+    console.log('something went wrong', err)
   }
 })
+
+
+router.post("/visitor/:id/checkout", async (req, res) => {
+  try {
+    const visitor = await Visitor.findOne({_id:req.params.id})
+    if(visitor.entry && visitor.entry.length > 0)
+    {
+      const lastEntry = visitor.entry[visitor.entry.length - 1]
+      if(lastEntry.checkout.time)
+      {
+        req.flash('error', `${visitor.name} had already checked out`)
+        res.redirect('/dashboard')
+        return
+      }
+      lastEntry.checkout.time = Date.now()
+      await visitor.save()
+      req.flash('success', `${visitor.name} had successfully checked out`)
+      res.redirect('/dashboard')
+    }
+    else
+    {
+      req.flash('error', `${visitor.name} does not have any check in entry`)
+      res.redirect('/dashboard')
+    }
+  }
+  catch (err)
+  {
+    console.log('something went wrong', err)
+  }
+})
+
+
 
 
 module.exports = router

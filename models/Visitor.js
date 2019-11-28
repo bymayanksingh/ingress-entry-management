@@ -19,15 +19,15 @@ const VisitorSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  attendance: [{
+  entry: [{
     date: {
       type: Date,
       default: Date.now
     },
-    entry: {
+    checkin: {
       type: Date
     },
-    exit: {
+    checkout: {
       time: {
         type: Date
       }

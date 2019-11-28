@@ -21,10 +21,35 @@
                 Add</button>
         </div>
     </form>
-    <br><br>
-    <%visitors.forEach(function(visitor){%>
-    <div>
-        <a class='btn btn-success btn-block btn-lg' href="/visitor/<%=visitor._id%>">Name: <%=visitor.name%> | Mob:<%=visitor.phone%> | Email: <%=visitor.email%></a><br>
-    </div>
-    <%})%>
+    <br>
+    <table class='table table-bordered '>
+            <thead>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Host</th>
+                <th>Checkin</th>
+                <th>Checout</th>
+            </thead>
+            <tbody>
+                <%visitors.forEach(function(visitor){%>
+                <tr>
+                    <td><%=visitor.name%></td>
+                    <td><%=visitor.phone%></td>
+                    <td><%=visitor.email%></td>
+                    <td><%=visitor.host%></td>
+                    <td>
+                        <form action='/visitor/<%=visitor.id%>/checkin' method='POST'>
+                            <button class='btn btn-success' type="submit">Checkin</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action='/visitor/<%=visitor.id%>/checkout' method='POST'>
+                            <button class='btn btn-primary' type="submit">Checkout</button>
+                        </form>
+                    </td>
+                </tr>
+                <%})%>
+            </tbody>
+        </table>
 </div>
