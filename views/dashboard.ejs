@@ -1,3 +1,30 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <%= user.name %></p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<div class='container'>
+    <h1 class="mt-4">Entry Management</h1>
+    <% include ./partials/messages %>
+    <p class="lead mb-3">Welcome, <%= user.name %> (HOST)</p>
+    <a href="/hosts/logout" class="btn btn-secondary">Logout</a>
+    <form action='/visitors' method='post'>
+        <h1 class="mt-4">Ask visitors to add their details</h1>
+        <div class='form-group'>
+            <label class="lead mb-3">Name:</label>
+            <input type="text" name="name" placeholder="Visitor's Name" class='form-control' required>
+            <br>
+            <label class="lead mb-3">Email:</label>
+            <input type="email" name="email" placeholder="Visitor's Email" class='form-control' required>
+            <br>
+            <label class="lead mb-3">Phone:</label>
+            <input type="phone" name="phone" placeholder="Visitor's Phone" class='form-control' required>
+            <br>
+            <label class="lead mb-3">Host (autofill):</label>
+            <input type="host" name="host" value="<%= user.name %>" class='form-control'>
+            <br> <button type="submit" class='btn btn-primary'><span class='glyphicon glyphicon-plus'></span>
+                Add</button>
+        </div>
+    </form>
+    <br><br>
+    <%visitors.forEach(function(visitor){%>
+    <div>
+        <a class='btn btn-success btn-block btn-lg' href="/visitor/<%=visitor._id%>">Name: <%=visitor.name%> | Mob:<%=visitor.phone%> | Email: <%=visitor.email%></a><br>
+    </div>
+    <%})%>
+</div>

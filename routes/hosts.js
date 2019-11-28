@@ -2,8 +2,8 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
-// Load User model
-const User = require('../models/Host')
+// Load Host model
+const Host = require('../models/Host')
 const { forwardAuthenticated } = require('../config/auth')
 
 // Login Page
@@ -40,8 +40,8 @@ router.post('/register', (req, res) => {
       password2
     })
   } else {
-    User.findOne({ email: email }).then(user => {
-      if (user) {
+    Host.findOne({ email: email }).then(host => {
+      if (host) {
         errors.push({ msg: 'Email already exists' })
         res.render('register', {
           errors,
@@ -53,7 +53,7 @@ router.post('/register', (req, res) => {
           password2
         })
       } else {
-        const newUser = new User({
+        const newHost = new Host({
           name,
           email,
           phone,
@@ -63,17 +63,17 @@ router.post('/register', (req, res) => {
 
         bcrypt.genSalt(10, (err, salt) => {
           if (err) throw err
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
+          bcrypt.hash(newHost.password, salt, (err, hash) => {
             if (err) throw err
-            newUser.password = hash
-            newUser
+            newHost.password = hash
+            newHost
               .save()
-              .then(user => {
+              .then(host => {
                 req.flash(
                   'success_msg',
                   'You are now registered and can log in'
                 )
-                res.redirect('/users/login')
+                res.redirect('/hosts/login')
               })
               .catch(err => console.log(err))
           })
@@ -87,7 +87,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/dashboard',
-    failureRedirect: '/users/login',
+    failureRedirect: '/hosts/login',
     failureFlash: true
   })(req, res, next)
 })
@@ -96,7 +96,7 @@ router.post('/login', (req, res, next) => {
 router.get('/logout', (req, res) => {
   req.logout()
   req.flash('success_msg', 'You are logged out')
-  res.redirect('/users/login')
+  res.redirect('/hosts/login')
 })
 
 module.exports = router

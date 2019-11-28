@@ -1,0 +1,39 @@
+<div class='container'>
+    <div> 
+        <br><br>
+        <strong class='lead'> Hello, <br> <%=visitor.name%> </strong>
+        <br><br>
+        <form action='/visitor/<%=visitor.id%>/enter' method='POST'>
+            <button class='btn btn-success' type="submit">Check In</button>
+        </form>
+        <br>
+        <form action='/visitor/<%=visitor.id%>/exit' method='POST'>
+            <button class='btn btn-primary' type="submit">Check Out</button>
+        </form>
+        <br>
+        <a href="/dashboard" class='btn btn-danger'> 
+            Back
+        </a>
+        <br><br>
+        <table class='table table-bordered '>
+            <thead>
+                <th>Date</th>
+                <th>Entry time</th>
+                <th>Exit time</th>
+            </thead>
+            <tbody>
+                <%visitor.attendance.forEach(a=>{%>
+                <tr>
+                    <td><%=a.date.toDateString()%></td>
+                    <td><%=moment(a.entry).format('HH:mm:ss')%></td>
+                    <td>
+                        <%if(a.exit.time){%>
+                        <%=moment(a.exit.time).format('HH:mm:ss')%>
+                        <%}%>
+                    </td>
+                </tr>
+                <%})%>
+            </tbody>
+        </table>
+    </div>
+</div>

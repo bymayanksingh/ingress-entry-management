@@ -3,7 +3,7 @@
     <div class="card card-body">
       <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Login</h1>
       <% include ./partials/messages %>
-      <form action="/users/login" method="POST">
+      <form action="/hosts/login" method="POST">
         <div class="form-group">
           <label for="email">Email</label>
           <input
@@ -27,7 +27,7 @@
         <button type="submit" class="btn btn-primary btn-block">Login</button>
       </form>
       <p class="lead mt-4">
-        No Account? <a href="/users/register">Register</a>
+        No Account? <a href="/hosts/register">Register</a>
       </p>
     </div>
   </div>
