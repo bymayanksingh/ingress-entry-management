@@ -13,9 +13,9 @@ const VisitorSchema = new mongoose.Schema({
   },
   phone: {
     type: Number,
-    required: true,
+    required: true
   },
-  host:{
+  host: {
     type: String,
     required: true
   },
