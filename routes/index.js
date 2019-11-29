@@ -1,7 +1,19 @@
+const nodemailer = require('nodemailer');
 const express = require('express')
 const router = express.Router()
 const Visitor = require('../models/Visitor')
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth')
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD
+  }
+})
 
 router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'))
 
@@ -48,7 +60,35 @@ router.post('/visitor/:id/checkin', async (req, res) => {
     } else {
       visitor.entry.push(data)
       await visitor.save()
-      req.flash('success', `${visitor.name} checked in for today successfully`)
+      req.flash('success', `${visitor.name} checked in for today successfully, email sent to host`)
+      
+      var hostEmail = req.user.email
+      var visitorName = visitor.name
+      var visitorEmail = visitor.email
+      var visitorPhone = visitor.phone
+      //var visitorCheckin =await visitor.entry.checkin.getTime()
+      var message = "New Checkin: \n\n"+"Name: " + visitorName + "\nEmail: " + visitorEmail + "\nPhone: " + visitorPhone /*+ "\nCheckin: " + visitorCheckin*/
+
+      console.log(message + "\nhost email: " + hostEmail)
+
+      var mailOptions = {
+        from: process.env.EMAIL,
+        to: hostEmail,
+        subject: 'Mail sent using Ingress - an entry management application',
+        text: message
+      }
+
+      transporter.sendMail(mailOptions, (err, info) => {
+        if(err)
+        {
+          console.log(err);
+        }
+        else
+        {
+          console.log('email sent: ' + info.response)
+        }
+      })
+
       res.redirect('/dashboard')
     }
   } catch (err) {
