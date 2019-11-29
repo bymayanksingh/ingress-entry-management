@@ -24,7 +24,8 @@
 - [Logo Credit](#logo-credit)
 
 ## About
-This is an easy to use entry management web application built using Node.js and MongoDB database at back-end, this project also uses embedded JavaScript templates (ejs) template engine, it also supports EMAIL and SMS automation using nodemailer and Nexmo API respectively. 
+
+this is an easy to use entry management web application built using Node.js and MongoDB database at back-end, this project also uses ejs (embedded javascript template engine), it also supports EMAIL and SMS automation using nodemailer and Nexmo API respectively, this project is my submission for the innovacer [summergeeks](https://summergeeks.in/) summer internship challenge.
 
 ## Usage
 
