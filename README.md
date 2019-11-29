@@ -24,7 +24,7 @@
 - [License](#license)
 
 ## About
-This is an entry management web application built using Node.js and MongoDB database at Back-end, this project also uses embedded JavaScript templates (ejs) template engine, it also supports EMAIL and SMS automation using nodemailer and twilio API respectively. 
+This is an easy to use entry management web application built using Node.js and MongoDB database at back-end, this project also uses embedded JavaScript templates (ejs) template engine, it also supports EMAIL and SMS automation using nodemailer and twilio API respectively. 
 
 ## Usage
 
