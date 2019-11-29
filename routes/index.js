@@ -66,8 +66,9 @@ router.post('/visitor/:id/checkin', async (req, res) => {
       var visitorName = visitor.name
       var visitorEmail = visitor.email
       var visitorPhone = visitor.phone
-      //var visitorCheckin =await visitor.entry.checkin.getTime()
-      var message = "New Checkin: \n\n"+"Name: " + visitorName + "\nEmail: " + visitorEmail + "\nPhone: " + visitorPhone /*+ "\nCheckin: " + visitorCheckin*/
+      var lastCheckIn = visitor.entry[visitor.entry.length - 1]
+      var visitorCheckin = lastCheckIn.checkin.getTime()
+      var message = "New Checkin: \n\n"+"Name: " + visitorName + "\nEmail: " + visitorEmail + "\nPhone: " + visitorPhone + "\nCheckin: " + visitorCheckin
 
       console.log(message + "\nhost email: " + hostEmail)
 
