@@ -32,7 +32,8 @@
                 <th>Checkout</th>
             </thead>
             <tbody>
-                <%visitors.forEach(function(visitor){%>
+                <%visitors.forEach(function(visitor){if(visitor.host === logged_in_name){ %>
+               
                 <tr>
                     <td><%=visitor.name%></td>
                     <td><%=visitor.phone%></td>
@@ -49,7 +50,7 @@
                         </form>
                     </td>
                 </tr>
-                <%})%>
+                <% }}) %>
             </tbody>
         </table>
 </div>

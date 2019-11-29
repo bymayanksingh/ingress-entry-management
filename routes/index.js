@@ -8,7 +8,7 @@ router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'))
 router.get('/dashboard', ensureAuthenticated, async (req, res) => {
   try {
     const visitors = await Visitor.find()
-    res.render('dashboard', { user: req.user, visitors: visitors })
+    res.render('dashboard', { user: req.user, visitors: visitors, logged_in_name: req.user.name })
   } catch (err) {
     console.log('cannot find visitors', err)
   }
