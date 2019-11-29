@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer')
 const express = require('express')
 const router = express.Router()
 const Visitor = require('../models/Visitor')
@@ -61,7 +61,7 @@ router.post('/visitor/:id/checkin', async (req, res) => {
       visitor.entry.push(data)
       await visitor.save()
       req.flash('success', `${visitor.name} checked in for today successfully, email sent to host`)
-      
+
       var hostEmail = req.user.email
       var visitorName = visitor.name
       var visitorEmail = visitor.email
@@ -71,8 +71,7 @@ router.post('/visitor/:id/checkin', async (req, res) => {
       var dateIST = new Date(visitorCheckin)
       dateIST.setHours(dateIST.getHours() + 5)
       dateIST.setMinutes(dateIST.getMinutes() + 30)
-      var dateIST = dateIST.toGMTString()
-      var message = "New Checkin: \n\n"+"Name: " + visitorName + "\nEmail: " + visitorEmail + "\nPhone: " + visitorPhone + "\nCheckin: " + dateIST
+      var message = 'New Checkin: \n\n' + 'Name: ' + visitorName + '\nEmail: ' + visitorEmail + '\nPhone: ' + visitorPhone + '\nCheckin: ' + dateIST.toGMTString()
 
       var mailOptions = {
         from: process.env.EMAIL,
@@ -82,12 +81,9 @@ router.post('/visitor/:id/checkin', async (req, res) => {
       }
 
       transporter.sendMail(mailOptions, (err, info) => {
-        if(err)
-        {
-          console.log(err);
-        }
-        else
-        {
+        if (err) {
+          console.log(err)
+        } else {
           console.log('email sent: ' + info.response)
         }
       })
@@ -113,14 +109,6 @@ router.post('/visitor/:id/checkout', async (req, res) => {
       await visitor.save()
       req.flash('success', `${visitor.name} successfully checked out, email sent to visitor`)
 
-      var mailOptions = {
-        from: process.env.EMAIL,
-        to: hostEmail,
-        subject: 'Mail sent using Ingress - Entry Management Application',
-        text: message
-      }
-
-
       // Name
       var visitorName = visitor.name
       // Phone
@@ -136,10 +124,10 @@ router.post('/visitor/:id/checkout', async (req, res) => {
       var dateISTCheckin = dateIST.toGMTString()
       // Check-out time
       var visitorCheckout = lastCheck.checkout.time.getTime()
-      var dateIST = new Date(visitorCheckout)
-      dateIST.setHours(dateIST.getHours() + 5)
-      dateIST.setMinutes(dateIST.getMinutes() + 30)
-      var dateISTCheckout = dateIST.toGMTString()
+      var dateISTCheckout = new Date(visitorCheckout)
+      dateISTCheckout.setHours(dateIST.getHours() + 5)
+      dateISTCheckout.setMinutes(dateIST.getMinutes() + 30)
+
       // Host name
       var hostName = req.user.name
       // Host email
@@ -147,7 +135,7 @@ router.post('/visitor/:id/checkout', async (req, res) => {
       // Address visited
       var hostAddress = req.user.address
 
-      var message = "You have successfully Checked out: \n\n"+"Name: " + visitorName + "\nPhone: " + visitorPhone  + "\nCheckin: " + dateISTCheckin + "\nCheckout: " + dateISTCheckout + "\nHost Name: " + hostName + "\nHost Email: " + hostEmail + "\nHost Address: " + hostAddress
+      var message = 'You have successfully Checked out: \n\n' + 'Name: ' + visitorName + '\nPhone: ' + visitorPhone + '\nCheckin: ' + dateISTCheckin + '\nCheckout: ' + dateISTCheckout.toGMTString() + '\nHost Name: ' + hostName + '\nHost Email: ' + hostEmail + '\nHost Address: ' + hostAddress
 
       var mailOptions = {
         from: process.env.EMAIL,
@@ -157,16 +145,12 @@ router.post('/visitor/:id/checkout', async (req, res) => {
       }
 
       transporter.sendMail(mailOptions, (err, info) => {
-        if(err)
-        {
-          console.log(err);
-        }
-        else
-        {
+        if (err) {
+          console.log(err)
+        } else {
           console.log('email sent: ' + info.response)
         }
       })
-
 
       res.redirect('/dashboard')
     } else {
