@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer')
 const express = require('express')
 const router = express.Router()
+const Nexmo = require('nexmo')
 const Visitor = require('../models/Visitor')
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth')
 
@@ -13,6 +14,11 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL,
     pass: process.env.PASSWORD
   }
+})
+
+const nexmo = new Nexmo({
+  apiKey: process.env.NEXMOAPIKEY,
+  apiSecret: process.env.NEXMOAPISECRET
 })
 
 router.get('/', forwardAuthenticated, (req, res) => res.render('welcome'))
@@ -60,7 +66,7 @@ router.post('/visitor/:id/checkin', async (req, res) => {
     } else {
       visitor.entry.push(data)
       await visitor.save()
-      req.flash('success', `${visitor.name} checked in for today successfully, email sent to host`)
+      req.flash('success', `${visitor.name} checked in for today successfully, email & sms sent to host`)
 
       var hostEmail = req.user.email
       var visitorName = visitor.name
@@ -71,7 +77,7 @@ router.post('/visitor/:id/checkin', async (req, res) => {
       var dateIST = new Date(visitorCheckin)
       dateIST.setHours(dateIST.getHours() + 5)
       dateIST.setMinutes(dateIST.getMinutes() + 30)
-      var message = 'New Checkin: \n\n' + 'Name: ' + visitorName + '\nEmail: ' + visitorEmail + '\nPhone: ' + visitorPhone + '\nCheckin: ' + dateIST.toGMTString()
+      var message = 'New Checkin:\n' + 'Name: ' + visitorName + '\nEmail: ' + visitorEmail + '\nPhone: ' + visitorPhone + '\nCheckin: ' + dateIST.toGMTString()
 
       var mailOptions = {
         from: process.env.EMAIL,
@@ -85,6 +91,23 @@ router.post('/visitor/:id/checkin', async (req, res) => {
           console.log(err)
         } else {
           console.log('email sent: ' + info.response)
+        }
+      })
+
+      const from = 'Ingress'
+      const to = '91' + req.user.phone
+      const text = message
+      console.log(to.trim(), text)
+
+      nexmo.message.sendSms(from, to, text, (err, info) => {
+        if (err) {
+          console.log(err)
+        } else {
+          if (info.messages[0].status === '0') {
+            console.log('Message sent successfully.')
+          } else {
+            console.log(`Message failed with error: ${info.messages[0]['error-text']}`)
+          }
         }
       })
 
