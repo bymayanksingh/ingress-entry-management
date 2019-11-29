@@ -1,3 +1,4 @@
+
 const express = require('express')
 const expressLayouts = require('express-ejs-layouts')
 const mongoose = require('mongoose')
@@ -7,6 +8,7 @@ const session = require('express-session')
 
 const app = express()
 
+require('dotenv').config()
 require('./config/passport')(passport)
 const db = require('./config/keys').mongoURI
 
@@ -23,7 +25,7 @@ app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true }))
 app.use(
   session({
-    secret: 'secret',
+    secret: process.env.SECRET,
     resave: true,
     saveUninitialized: true
   })
@@ -40,5 +42,4 @@ app.use('/', require('./routes/index.js'))
 app.use('/hosts', require('./routes/hosts.js'))
 
 const PORT = process.env.PORT || 5000
-
 app.listen(PORT, console.log(`Server started on port ${PORT}`))
