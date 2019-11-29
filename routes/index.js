@@ -147,7 +147,7 @@ router.post('/visitor/:id/checkout', async (req, res) => {
       // Address visited
       var hostAddress = req.user.address
 
-      var message = "You have successfully Checked out: \n\n"+"Name: " + visitorName + "\nPhone: " + visitorPhone  + "\nCheckin: " + dateISTCheckin + "\nCheckout: " + dateISTCheckout + "\nHostName: " + hostName + "\nHostEmail: " + hostEmail + "\nHostAddress: " + hostAddress
+      var message = "You have successfully Checked out: \n\n"+"Name: " + visitorName + "\nPhone: " + visitorPhone  + "\nCheckin: " + dateISTCheckin + "\nCheckout: " + dateISTCheckout + "\nHost Name: " + hostName + "\nHost Email: " + hostEmail + "\nHost Address: " + hostAddress
 
       var mailOptions = {
         from: process.env.EMAIL,
