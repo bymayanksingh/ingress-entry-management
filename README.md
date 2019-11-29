@@ -1,6 +1,7 @@
 
 <p align="center">
   <img src="./logo/Ingress.png" width="190">
+  <img src="./logo/title.png" width="230">
 </p>
 
 
@@ -92,7 +93,7 @@ $ node app.js
     ├── register.ejs
     └── welcome.ejs
 
-6 directories, 19 files
+7 directories, 19 files
 ```
 
 
