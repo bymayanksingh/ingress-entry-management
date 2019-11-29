@@ -24,7 +24,7 @@
 - [Logo Credit](#logo-credit)
 
 ## About
-This is an easy to use entry management web application built using Node.js and MongoDB database at back-end, this project also uses embedded JavaScript templates (ejs) template engine, it also supports EMAIL and SMS automation using nodemailer and twilio API respectively. 
+This is an easy to use entry management web application built using Node.js and MongoDB database at back-end, this project also uses embedded JavaScript templates (ejs) template engine, it also supports EMAIL and SMS automation using nodemailer and Nexmo API respectively. 
 
 ## Usage
 
@@ -45,6 +45,7 @@ $ git clone https://github.com/code-monk08/entry-management.git
 $ cd entry-management
 $ sudo npm install
 ```
+- Obtain API Key & API Secret from [Nexmo SMS](https://www.nexmo.com/) API
 
 - create a `.env` file in root directory and assign the following environment variables
 `NOTE: don't version control your .env file, make sure .env is added in .gitignore file`
@@ -55,6 +56,8 @@ $ echo "PORT={5001 or port of your choice}" >> .env
 $ echo "SECRET={some secret message of your choice}" >> .env
 $ echo "EMAIL={your email id}" >> .env
 $ echo "PASSWORD={your email password}" >> .env
+$ echo "NEXMOAPIKEY={your nexmo api key for sms}" >> .env
+$ echo "NEXMOAPISECRET={your nexmo api secret for sms}" >> .env
 ```
 
 - Finally run the application using 
