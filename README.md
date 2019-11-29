@@ -121,6 +121,15 @@ Close issues using keywords: [how to ?](https://help.github.com/en/articles/clos
 
 ## Gallery
 
+<p align="center">
+  <img src="./logo/1.png">
+  <img src="./logo/2.png">
+  <img src="./logo/3.png">
+  <img src="./logo/4.png">
+  <img src="./logo/5.png">
+  <img src="./logo/6.png">
+</p>
+
 
 ## Credit/Acknowledgment
 [![Contributors](https://img.shields.io/github/contributors/code-monk08/entry-management?style=for-the-badge)](https://github.com/code-monk08/entry-management/graphs/contributors)

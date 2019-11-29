@@ -48,7 +48,7 @@ router.post('/visitor/:id/checkin', async (req, res) => {
     } else {
       visitor.entry.push(data)
       await visitor.save()
-      req.flash('success', `${visitor.name} checked in in for today successfully`)
+      req.flash('success', `${visitor.name} checked in for today successfully`)
       res.redirect('/dashboard')
     }
   } catch (err) {
