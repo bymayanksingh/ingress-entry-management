@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="./logo/Ingress.png" width="190">
+  <img src="./logo/Ingress.png" width="160">
 </p>
 
 <p align="center">
