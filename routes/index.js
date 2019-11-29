@@ -125,8 +125,8 @@ router.post('/visitor/:id/checkout', async (req, res) => {
       // Check-out time
       var visitorCheckout = lastCheck.checkout.time.getTime()
       var dateISTCheckout = new Date(visitorCheckout)
-      dateISTCheckout.setHours(dateIST.getHours() + 5)
-      dateISTCheckout.setMinutes(dateIST.getMinutes() + 30)
+      dateISTCheckout.setHours(dateISTCheckout.getHours() + 5)
+      dateISTCheckout.setMinutes(dateISTCheckout.getMinutes() + 30)
 
       // Host name
       var hostName = req.user.name
@@ -135,7 +135,7 @@ router.post('/visitor/:id/checkout', async (req, res) => {
       // Address visited
       var hostAddress = req.user.address
 
-      var message = 'You have successfully Checked out: \n\n' + 'Name: ' + visitorName + '\nPhone: ' + visitorPhone + '\nCheckin: ' + dateISTCheckin + '\nCheckout: ' + dateISTCheckout.toGMTString() + '\nHost Name: ' + hostName + '\nHost Email: ' + hostEmail + '\nHost Address: ' + hostAddress
+      var message = 'You have successfully checked out: \n\n' + 'Name: ' + visitorName + '\nPhone: ' + visitorPhone + '\nCheckin: ' + dateISTCheckin + '\nCheckout: ' + dateISTCheckout.toGMTString() + '\nHost Name: ' + hostName + '\nHost Email: ' + hostEmail + '\nHost Address: ' + hostAddress
 
       var mailOptions = {
         from: process.env.EMAIL,

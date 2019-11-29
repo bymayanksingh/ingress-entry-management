@@ -19,9 +19,9 @@
 - [File Structure](#file-structure)
 - [Guideline](#guideline)
 - [Gallery](#gallery)
-- [Endpoints](#endpoints)
 - [Credit/Acknowledgment](#creditacknowledgment)
 - [License](#license)
+- [Logo Credit](#logo-credit)
 
 ## About
 This is an easy to use entry management web application built using Node.js and MongoDB database at back-end, this project also uses embedded JavaScript templates (ejs) template engine, it also supports EMAIL and SMS automation using nodemailer and twilio API respectively. 
