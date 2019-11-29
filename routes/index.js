@@ -66,16 +66,18 @@ router.post('/visitor/:id/checkin', async (req, res) => {
       var visitorName = visitor.name
       var visitorEmail = visitor.email
       var visitorPhone = visitor.phone
-      var lastCheckIn = visitor.entry[visitor.entry.length - 1]
-      var visitorCheckin = lastCheckIn.checkin.getTime()
-      var message = "New Checkin: \n\n"+"Name: " + visitorName + "\nEmail: " + visitorEmail + "\nPhone: " + visitorPhone + "\nCheckin: " + visitorCheckin
-
-      console.log(message + "\nhost email: " + hostEmail)
+      var lastCheck = visitor.entry[visitor.entry.length - 1]
+      var visitorCheckin = lastCheck.checkin.getTime()
+      var dateIST = new Date(visitorCheckin)
+      dateIST.setHours(dateIST.getHours() + 5)
+      dateIST.setMinutes(dateIST.getMinutes() + 30)
+      var dateIST = dateIST.toGMTString()
+      var message = "New Checkin: \n\n"+"Name: " + visitorName + "\nEmail: " + visitorEmail + "\nPhone: " + visitorPhone + "\nCheckin: " + dateIST
 
       var mailOptions = {
         from: process.env.EMAIL,
         to: hostEmail,
-        subject: 'Mail sent using Ingress - an entry management application',
+        subject: 'Mail sent using Ingress - Entry Management Application',
         text: message
       }
 
@@ -109,7 +111,63 @@ router.post('/visitor/:id/checkout', async (req, res) => {
       }
       lastEntry.checkout.time = Date.now()
       await visitor.save()
-      req.flash('success', `${visitor.name} successfully checked out`)
+      req.flash('success', `${visitor.name} successfully checked out, email sent to visitor`)
+
+      var mailOptions = {
+        from: process.env.EMAIL,
+        to: hostEmail,
+        subject: 'Mail sent using Ingress - Entry Management Application',
+        text: message
+      }
+
+
+      // Name
+      var visitorName = visitor.name
+      // Phone
+      var visitorPhone = visitor.phone
+      // Email
+      var visitorEmail = visitor.email
+      // Check-in time
+      var lastCheck = visitor.entry[visitor.entry.length - 1]
+      var visitorCheckin = lastCheck.checkin.getTime()
+      var dateIST = new Date(visitorCheckin)
+      dateIST.setHours(dateIST.getHours() + 5)
+      dateIST.setMinutes(dateIST.getMinutes() + 30)
+      var dateISTCheckin = dateIST.toGMTString()
+      // Check-out time
+      var visitorCheckout = lastCheck.checkout.time.getTime()
+      var dateIST = new Date(visitorCheckout)
+      dateIST.setHours(dateIST.getHours() + 5)
+      dateIST.setMinutes(dateIST.getMinutes() + 30)
+      var dateISTCheckout = dateIST.toGMTString()
+      // Host name
+      var hostName = req.user.name
+      // Host email
+      var hostEmail = req.user.email
+      // Address visited
+      var hostAddress = req.user.address
+
+      var message = "You have successfully Checked out: \n\n"+"Name: " + visitorName + "\nPhone: " + visitorPhone  + "\nCheckin: " + dateISTCheckin + "\nCheckout: " + dateISTCheckout + "\nHostName: " + hostName + "\nHostEmail: " + hostEmail + "\nHostAddress: " + hostAddress
+
+      var mailOptions = {
+        from: process.env.EMAIL,
+        to: visitorEmail,
+        subject: 'Mail sent using Ingress - Entry Management Application',
+        text: message
+      }
+
+      transporter.sendMail(mailOptions, (err, info) => {
+        if(err)
+        {
+          console.log(err);
+        }
+        else
+        {
+          console.log('email sent: ' + info.response)
+        }
+      })
+
+
       res.redirect('/dashboard')
     } else {
       req.flash('error', `${visitor.name} does not have any check in entry`)

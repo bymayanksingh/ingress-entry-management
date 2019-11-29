@@ -24,7 +24,7 @@
 - [License](#license)
 
 ## About
-This is an entry management web application built using Node.js and MongoDB database at Back-end, this project also uses embedded JavaScript templates (ejs) template engine.
+This is an entry management web application built using Node.js and MongoDB database at Back-end, this project also uses embedded JavaScript templates (ejs) template engine, it also supports EMAIL and SMS automation using nodemailer and twilio API respectively. 
 
 ## Usage
 
@@ -57,9 +57,10 @@ $ echo "EMAIL={your email id}" >> .env
 $ echo "PASSWORD={your email password}" >> .env
 ```
 
-- Finally run the application using
+- Finally run the application using 
 
-```
+```bash
+$ mongod
 $ node app.js
 ```  
 
