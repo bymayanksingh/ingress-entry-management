@@ -137,6 +137,8 @@ Close issues using keywords: [how to ?](https://help.github.com/en/articles/clos
   <img src="./logo/4.png">
   <img src="./logo/5.png">
   <img src="./logo/6.png">
+  <img src="./logo/7.png">
+  <img src="./logo/8.png">
 </p>
 
 
