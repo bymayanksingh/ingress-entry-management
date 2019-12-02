@@ -27,7 +27,7 @@
 
 ## About
 
-This is Ingress an easy to use MVP on entry management, Ingress was built using Node.js and MongoDB database, It uses [ejs](https://ejs.co/) (embedded javascript templates), it also supports sending **EMAILS** and **SMS** using nodemailer module and Nexmo API respectively, this project was implemented as my submission for the innovacer [summergeeks](https://summergeeks.in/) internship challenge by [Innovacer](https://innovaccer.com/), It meets all the criterias as mentioned in the assignment provided by summergeeks.
+This is Ingress an easy to use MVP on entry management, Ingress was built using Node.js and MongoDB database, It uses [ejs](https://ejs.co/) (embedded javascript templates), it also supports sending **EMAILS** and **SMS** using nodemailer module and Nexmo API respectively, this project was implemented as my submission for the innovacer [summergeeks 2020](https://summergeeks.in/) internship challenge by [Innovacer](https://innovaccer.com/), It meets all the criterias as mentioned in the assignment provided by summergeeks.
 
 ## Usage
 
