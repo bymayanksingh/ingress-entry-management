@@ -8,9 +8,9 @@
 </p>
 
 
-<p align="center">
+<div align="center">
 [![Open Issues](https://img.shields.io/github/issues/code-monk08/entry-management?style=for-the-badge)](https://github.com/code-monk08/entry-management/issues) [![Forks](https://img.shields.io/github/forks/code-monk08/entry-management?style=for-the-badge)](https://github.com/code-monk08/entry-management/network/members) [![Stars](https://img.shields.io/github/stars/code-monk08/entry-management?style=for-the-badge)](https://github.com/code-monk08/entry-management/stargazers) ![Maintained](https://img.shields.io/maintenance/yes/2019?style=for-the-badge&logo=github)  ![Made with Node.js](https://img.shields.io/badge/Made%20with-Nodejs-blueviolet?style=for-the-badge&logo=node)  ![Open Source Love](https://img.shields.io/badge/Open%20Source-%E2%99%A5-red?style=for-the-badge&logo=open-source-initiative)  ![Built with Love](https://img.shields.io/badge/Built%20With-%E2%99%A5-critical?style=for-the-badge&logo=ko-fi) [![Telegram](https://img.shields.io/badge/Telegram-Chat-informational?style=for-the-badge&logo=telegram)](https://telegram.me/codemonk08)
-</p>
+</div>
 
 ## Index
 
