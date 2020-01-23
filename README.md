@@ -72,7 +72,7 @@ $ node app.js
 ```  
 
 ## File Structure
-- Add a file structure here with the basic details about files, below is the current file structure.
+- Below is the current file structure.
 
 ```bash
 .
