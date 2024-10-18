@@ -1,0 +1,72 @@
+<div class="bg-white shadow-md rounded-lg p-8">
+  <h1 class="text-3xl font-bold mb-8 text-center">Ingress Dashboard</h1>
+  <%- include('partials/messages') %>
+  <p class="text-xl mb-4">Welcome, <span class="font-semibold"><%= user.name %></span> (HOST)</p>
+  <hr class="my-6">
+  <div class="mb-8">
+    <h2 class="text-2xl font-semibold mb-4">Add New Visitor</h2>
+    <form action='/visitors' method='post' class="space-y-4">
+      <div>
+        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Visitor's Name" class="input" required>
+      </div>
+      <div>
+        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Visitor's Email" class="input" required>
+      </div>
+      <div>
+        <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Phone:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Visitor's Phone" class="input" required>
+      </div>
+      <div>
+        <label for="host" class="block text-gray-700 text-sm font-bold mb-2">Host (autofill):</label>
+        <input type="text" id="host" name="host" value="<%= user ? user.name : '' %>" class="input" readonly>
+      </div>
+      <button type="submit" class="btn btn-primary"><i class="fas fa-plus mr-2"></i>Add Visitor</button>
+    </form>
+  </div>
+  <hr class="my-6">
+  <div>
+    <h2 class="text-2xl font-semibold mb-4">Visitors List</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full table-auto">
+        <thead>
+          <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+            <th class="py-3 px-6 text-left">Name</th>
+            <th class="py-3 px-6 text-left">Mobile</th>
+            <th class="py-3 px-6 text-left">Email</th>
+            <th class="py-3 px-6 text-left">Host</th>
+            <th class="py-3 px-6 text-center">Checkin</th>
+            <th class="py-3 px-6 text-center">Checkout</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-600 text-sm font-light">
+          <% visitors.forEach((visitor) => { %>
+            <% if (visitor.host === logged_in_name) { %>
+              <tr class="border-b border-gray-200 hover:bg-gray-100">
+                <td class="py-3 px-6 text-left whitespace-nowrap">
+                  <div class="flex items-center">
+                    <span class="font-medium"><%= visitor.name %></span>
+                  </div>
+                </td>
+                <td class="py-3 px-6 text-left"><%= visitor.phone %></td>
+                <td class="py-3 px-6 text-left"><%= visitor.email %></td>
+                <td class="py-3 px-6 text-left"><%= visitor.host %></td>
+                <td class="py-3 px-6 text-center">
+                  <form action='/visitor/<%= visitor.id %>/checkin' method='POST'>
+                    <button class="btn btn-secondary text-xs" type="submit">Checkin</button>
+                  </form>
+                </td>
+                <td class="py-3 px-6 text-center">
+                  <form action='/visitor/<%= visitor.id %>/checkout' method='POST'>
+                    <button class="btn btn-accent text-xs" type="submit">Checkout</button>
+                  </form>
+                </td>
+              </tr>
+            <% } %>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md font-semibold text-white transition-colors duration-300;
+  }
+  .btn-primary {
+    @apply bg-primary hover:bg-blue-600;
+  }
+  .btn-secondary {
+    @apply bg-secondary hover:bg-green-600;
+  }
+  .btn-accent {
+    @apply bg-accent hover:bg-yellow-600;
+  }
+  .input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary;
+  }
+}
