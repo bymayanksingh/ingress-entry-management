@@ -1,4 +1,3 @@
-
 <div align="center">
 <p>
   <img src="./logo/Ingress.png" width="160">
@@ -8,154 +7,155 @@
 <img src="./logo/title.png" width="400">
 </p>
 
-[![Open Issues](https://img.shields.io/github/issues/code-monk08/entry-management?style=for-the-badge)](https://github.com/code-monk08/entry-management/issues) [![Forks](https://img.shields.io/github/forks/code-monk08/entry-management?style=for-the-badge)](https://github.com/code-monk08/entry-management/network/members) [![Stars](https://img.shields.io/github/stars/code-monk08/entry-management?style=for-the-badge)](https://github.com/code-monk08/entry-management/stargazers) ![Maintained](https://img.shields.io/maintenance/yes/2019?style=for-the-badge&logo=github)  ![Made with Node.js](https://img.shields.io/badge/Made%20with-Nodejs-blueviolet?style=for-the-badge&logo=node)  ![Open Source Love](https://img.shields.io/badge/Open%20Source-%E2%99%A5-red?style=for-the-badge&logo=open-source-initiative)  ![Built with Love](https://img.shields.io/badge/Built%20With-%E2%99%A5-critical?style=for-the-badge&logo=ko-fi) [![Telegram/codemonk08](https://img.shields.io/badge/Telegram-Chat-informational?style=for-the-badge&logo=telegram)](https://telegram.me/codemonk08)
+[![Open Issues](https://img.shields.io/github/issues/code-monk08/entry-management?style=for-the-badge)](https://github.com/code-monk08/entry-management/issues) [![Forks](https://img.shields.io/github/forks/code-monk08/entry-management?style=for-the-badge)](https://github.com/code-monk08/entry-management/network/members) [![Stars](https://img.shields.io/github/stars/code-monk08/entry-management?style=for-the-badge)](https://github.com/code-monk08/entry-management/stargazers) ![Maintained](https://img.shields.io/maintenance/yes/2024?style=for-the-badge&logo=github)  ![Made with Node.js](https://img.shields.io/badge/Made%20with-Nodejs-blueviolet?style=for-the-badge&logo=node)  ![Open Source Love](https://img.shields.io/badge/Open%20Source-%E2%99%A5-red?style=for-the-badge&logo=open-source-initiative)  ![Built with Love](https://img.shields.io/badge/Built%20With-%E2%99%A5-critical?style=for-the-badge&logo=ko-fi) [![Telegram/codemonk08](https://img.shields.io/badge/Telegram-Chat-informational?style=for-the-badge&logo=telegram)](https://telegram.me/codemonk08)
 
 </div>
 
-## Index
+## Table of Contents
 
-- [Index](#index)
+- [Table of Contents](#table-of-contents)
 - [About](#about)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation)
 - [Usage](#usage)
-  - [Installation](#installation)
-- [File Structure](#file-structure)
-- [Guideline](#guideline)
-- [Gallery](#gallery)
-- [Credit/Acknowledgment](#creditacknowledgment)
+- [Project Structure](#project-structure)
+- [API Endpoints](#api-endpoints)
+- [Environment Variables](#environment-variables)
+- [Contributing](#contributing)
 - [License](#license)
-- [Logo Credit](#logo-credit)
 
 ## About
 
-This is Ingress an easy to use MVP on entry management, Ingress was built using [Node.js](https://github.com/nodejs) and MongoDB database using [mongoose](https://github.com/Automattic/mongoose), It uses [ejs](https://ejs.co/) (embedded javascript templates), it also supports sending **EMAILS** and **SMS** using [nodemailer module](https://www.npmjs.com/package/nodemailer) and [Nexmo API](https://www.nexmo.com/) respectively, this project was implemented as my submission for the [summergeeks 2020](https://summergeeks.in/) internship challenge by [Innovacer](https://innovaccer.com/), It meets all the criterias as mentioned in the assignment provided by summergeeks.
+Ingress is an easy-to-use MVP (Minimum Viable Product) for entry management. It was built using Node.js and MongoDB database with Mongoose ODM. The application uses EJS (Embedded JavaScript templates) for server-side rendering and supports sending emails and SMS notifications using the Nodemailer module and Nexmo API, respectively.
 
+This project was implemented as a submission for the [summergeeks 2020](https://summergeeks.in/) internship challenge by [Innovacer](https://innovaccer.com/). It meets all the criteria mentioned in the assignment provided by summergeeks.
+
+## Features
+
+- User authentication (register, login, logout)
+- Host dashboard for managing visitors
+- Add new visitors
+- Check-in and check-out functionality
+- Email notifications to hosts upon visitor check-in
+- SMS notifications to hosts upon visitor check-in
+- Email notifications to visitors upon check-out
+- Responsive design using Tailwind CSS
+
+## Tech Stack
+
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB with Mongoose ODM
+- **Frontend**: EJS templates, Tailwind CSS
+- **Authentication**: Passport.js
+- **Notifications**: Nodemailer (Email), Nexmo API (SMS)
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/code-monk08/entry-management.git
+   cd entry-management
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env` file in the root directory and add the following variables:
+   ```
+   PORT=5000
+   SECRET=your_secret_key
+   EMAIL=your_email@gmail.com
+   PASSWORD=your_email_password
+   NEXMOAPIKEY=your_nexmo_api_key
+   NEXMOAPISECRET=your_nexmo_api_secret
+   ```
+
+4. Start MongoDB:
+   ```bash
+   mongod
+   ```
+
+5. Run the application:
+   ```bash
+   npm start
+   ```
 
 ## Usage
 
-### Installation
+1. Open your browser and navigate to `http://localhost:5000`
+2. Register as a new host or login if you already have an account
+3. Use the dashboard to add visitors and manage check-ins/check-outs
 
-**Development**
+## Project Structure
 
-If you just want to do a simple test run of the application, you can  first
-
-- Clone the repository
-
-```bash
-$ git clone https://github.com/code-monk08/entry-management.git
 ```
-- Install dependencies by using the following commands.
-
-```bash
-$ cd entry-management
-$ sudo npm install
-```
-- Obtain API Key & API Secret from [Nexmo SMS](https://www.nexmo.com/) API
-
-- create a `.env` file in root directory and assign the following environment variables
-`NOTE: don't version control your .env file, make sure .env is added in .gitignore file`
-```bash
-$ cd entry-management
-$ touch .env
-$ echo "PORT={5001 or port of your choice}" >> .env
-$ echo "SECRET={some secret message of your choice}" >> .env
-$ echo "EMAIL={your email id}" >> .env
-$ echo "PASSWORD={your email password}" >> .env
-$ echo "NEXMOAPIKEY={your nexmo api key for sms}" >> .env
-$ echo "NEXMOAPISECRET={your nexmo api secret for sms}" >> .env
-```
-
-- Finally run the application using 
-
-```bash
-$ mongod
-$ node app.js
-```  
-
-## File Structure
-- Below is the current file structure.
-
-```bash
 .
-├── app.js
-├── node_modules
-├── config
-│   ├── auth.js
-│   ├── keys.js
-│   └── passport.js
-├── LICENSE
-├── logo
-│   └── Ingress.png
-├── models
-│   ├── Host.js
-│   └── Visitor.js
-├── package.json
-├── package-lock.json
-├── README.md
-├── routes
-│   ├── hosts.js
-│   └── index.js
-└── views
-    ├── dashboard.ejs
-    ├── layout.ejs
-    ├── login.ejs
-    ├── partials
-    │   └── messages.ejs
-    ├── register.ejs
-    └── welcome.ejs
-
-7 directories, 19 files
+├── app.js                 # Main application file
+├── config/                # Configuration files
+│   ├── auth.js            # Authentication middleware
+│   ├── keys.js            # Database configuration
+│   └── passport.js        # Passport.js configuration
+├── models/                # Database models
+│   ├── Host.js            # Host model
+│   └── Visitor.js         # Visitor model
+├── routes/                # Route handlers
+│   ├── hosts.js           # Host-related routes
+│   └── index.js           # Main routes
+├── views/                 # EJS templates
+│   ├── dashboard.ejs      # Dashboard view
+│   ├── layout.ejs         # Main layout
+│   ├── login.ejs          # Login view
+│   ├── register.ejs       # Registration view
+│   ├── welcome.ejs        # Welcome page
+│   └── partials/          # Partial views
+│       └── messages.ejs   # Flash messages partial
+├── public/                # Static files
+│   └── styles/            # CSS files
+├── .env                   # Environment variables
+├── package.json           # Project dependencies
+└── README.md              # Project documentation
 ```
 
-- __Dependency Graph__
+## API Endpoints
 
-<p align="center">
-  <img src="./logo/depend.svg">
-</p>
+- `GET /`: Welcome page
+- `GET /dashboard`: Host dashboard (requires authentication)
+- `POST /visitors`: Add a new visitor
+- `POST /visitor/:id/checkin`: Check-in a visitor
+- `POST /visitor/:id/checkout`: Check-out a visitor
+- `GET /hosts/login`: Login page
+- `GET /hosts/register`: Registration page
+- `POST /hosts/register`: Register a new host
+- `POST /hosts/login`: Authenticate a host
+- `POST /hosts/logout`: Logout a host
 
-## Guideline
+## Environment Variables
 
-- __Code Style__
+- `PORT`: The port number on which the server will run
+- `SECRET`: Secret key for session management
+- `EMAIL`: Email address for sending notifications
+- `PASSWORD`: Password for the email account
+- `NEXMOAPIKEY`: Nexmo API key for SMS notifications
+- `NEXMOAPISECRET`: Nexmo API secret for SMS notifications
 
-In order to maintain the code style consistency across entire project I use a code linter. Therefore, I kindly suggest you to do the same whenever you push commits to this project. 
+## Contributing
 
-The JavaScript code linter I use is called [eslint](https://eslint.org/), ESLint requires [Node.js](http://nodejs.org) and works on Windows, Mac and Linux
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a pull request
 
-```bash
-$ npm install eslint --save
-```
-
-- __Usage__
-
-```bash
-$ eslint . --fix
-```
-
-For more details and available options, please check the [eslint website](https://eslint.org/).
-
-- __Close Issues__
-
-Close issues using keywords: [how to ?](https://help.github.com/en/articles/closing-issues-using-keywords)
-
-## Gallery
-
-<p align="center">
-  <img src="./logo/1.png">
-  <img src="./logo/2.png">
-  <img src="./logo/3.png">
-  <img src="./logo/4.png">
-  <img src="./logo/5.png">
-  <img src="./logo/6.png">
-  <img src="./logo/7.png">
-  <img src="./logo/8.png">
-  <img src="./logo/9.png">
-</p>
-
-
-## Credit/Acknowledgment
-[![Contributors](https://img.shields.io/github/contributors/code-monk08/entry-management?style=for-the-badge)](https://github.com/code-monk08/entry-management/graphs/contributors)
+Please make sure to update tests as appropriate and adhere to the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## License
-[![License](https://img.shields.io/github/license/code-monk08/entry-management?style=for-the-badge)](https://github.com/code-monk08/entry-management/blob/master/LICENSE)
 
-## Logo Credit
-Logo used in this document is credited to [Ingress Icon](https://iconscout.com/icon/ingress-1) by [Icons8](https://iconscout.com/contributors/icons8)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+For any questions or support, please [open an issue](https://github.com/code-monk08/entry-management/issues) or contact the maintainer.
